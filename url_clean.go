@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 )
@@ -72,8 +73,16 @@ func main() {
     // Read input either from stdin or from the argument, if any
     urls_to_clean := read_input()
 
+    // Get the path of the executable
+	exe_path, err := os.Executable()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	// Extract the directory portion of the path
+	exe_dir := filepath.Dir(exe_path)
     // Read the unwanted_params.txt file and get the list of unwanted params
-    unwanted_params, _ := get_unwanted_params("unwanted_params.txt")
+    unwanted_params, _ := get_unwanted_params(filepath.Join(exe_dir, "unwanted_params.txt"))
 
     // Go through the list of URLs, then through that of unwanted params
     for _, url_to_clean := range urls_to_clean {

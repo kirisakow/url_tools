@@ -57,7 +57,7 @@ function url_unescape() {
     else
         export url_to_unescape="$*"
     fi
-    python3 url_unescape.py
+    python3 $(dirname $BASH_SOURCE)/url_unescape.py
     unset url_to_unescape
 }
 ### E N D function url_unescape
