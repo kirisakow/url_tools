@@ -50,24 +50,27 @@ func get_abs_path(filename string) string {
 	return filepath.Join(exe_dir, filename)
 }
 
-// Reads the unwanted_params.txt file and returns its content as an array of strings.
-func get_unwanted_params(filename string) ([]string, error) {
-	file, err := os.Open(get_abs_path(filename))
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	var unwanted_params []string
-	for scanner.Scan() {
-		unwanted_params = append(unwanted_params, scanner.Text())
-	}
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-
-	return unwanted_params, nil
+func unwanted_params(filename string) <-chan string {
+	ch := make(chan string)
+	go func() {
+		file, err := os.Open(get_abs_path(filename))
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		defer file.Close()
+		scanner := bufio.NewScanner(file)
+		for scanner.Scan() {
+			line := scanner.Text()
+			ch <- strings.TrimSpace(line)
+		}
+		if err := scanner.Err(); err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		close(ch)
+	}()
+	return ch
 }
 
 // Removes the unwanted query parameter from the URL.
@@ -85,17 +88,10 @@ func clean_url(url_to_clean, unwanted_param string) string {
 func main() {
 	// Read input either from stdin or from the argument, if any
 	urls_to_clean := read_input()
-
-	// Read the unwanted_params.txt file and get the list of unwanted params
-	unwanted_params, err := get_unwanted_params("unwanted_params.txt")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	// Go through the list of URLs, then through that of unwanted params
+	// Go through the list of URLs to clean
 	for _, url_to_clean := range urls_to_clean {
-		for _, unwanted_param := range unwanted_params {
+		// Iterate over the unwanted query params file contents line by line, as a channel
+		for unwanted_param := range unwanted_params("unwanted_params.txt") {
 			// Check if the unwanted param does not contain a '?' symbol
 			if !strings.Contains(unwanted_param, "?") {
 				// Remove the unwanted param from the URL
