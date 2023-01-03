@@ -75,6 +75,7 @@ hmb_campaign
 hmb_medium
 hmb_source
 hsCtaTracking
+instagram?igshid
 itm_*
 linkedin.com?referenceId
 linkedin.com?refId
