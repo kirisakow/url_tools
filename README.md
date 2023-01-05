@@ -1,6 +1,6 @@
 # My URL tools written in BASH and Go
 
-And six lines of Python, too.
+...and 8 lines of Python.
 
 ### BASH functions `url_deref` and `url_unescape`
 
