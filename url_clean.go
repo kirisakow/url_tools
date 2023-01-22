@@ -74,11 +74,11 @@ func unwanted_query_params(filename string) <-chan string {
 }
 
 // Removes the unwanted query parameter from the URL.
-func remove_param_if_present(url_to_clean, unwanted_param string) string {
+func remove_param_if_present(url_to_clean, unwanted_qparam string) string {
 	// If the unwanted param contains an asterisk, replace it with a regex pattern
-	unwanted_param = strings.ReplaceAll(unwanted_param, "*", "[^&=?]*")
+	unwanted_qparam = strings.ReplaceAll(unwanted_qparam, "*", "[^&=?]*")
 	// Use a regular expression to match the unwanted query parameter and remove it
-	r := regexp.MustCompile(fmt.Sprintf(`[&]?%s=[^&]*`, unwanted_param))
+	r := regexp.MustCompile(fmt.Sprintf(`[&]?%s=[^&]*`, unwanted_qparam))
 	url_to_clean = r.ReplaceAllString(url_to_clean, "")
 	// remove final ? symbol if no params left
 	url_to_clean = regexp.MustCompile("[?]$").ReplaceAllString(url_to_clean, "")
@@ -87,23 +87,23 @@ func remove_param_if_present(url_to_clean, unwanted_param string) string {
 
 func clean_url_from_unwanted_query_params(url_to_clean string) string {
 	// Iterate over the unwanted query params file contents line by line, as a channel
-	for unwanted_param := range unwanted_query_params("unwanted_query_params.txt") {
+	for unwanted_qparam := range unwanted_query_params("unwanted_query_params.txt") {
 		// Check if the unwanted param does not contain a '?' symbol
-		if !strings.Contains(unwanted_param, "?") {
+		if !strings.Contains(unwanted_qparam, "?") {
 			// Remove the unwanted param from the URL
-			url_to_clean = remove_param_if_present(url_to_clean, unwanted_param)
+			url_to_clean = remove_param_if_present(url_to_clean, unwanted_qparam)
 		} else {
-			// Split unwanted_param into domain name and the actual param
-			parts := strings.Split(unwanted_param, "?")
-			unwanted_param_domain_name, unwanted_param_without_domain_name := parts[0], parts[1]
+			// Split unwanted_qparam into domain name and the actual param
+			parts := strings.Split(unwanted_qparam, "?")
+			unwanted_qparam_domain_name, unwanted_qparam_without_domain_name := parts[0], parts[1]
 			// Strip the protocol from the URL
 			url_without_protocol := regexp.MustCompile("https?://").ReplaceAllString(url_to_clean, "")
 			// Strip everything after the domain name from the URL
 			url_to_clean_domain_name := regexp.MustCompile("/.*$").ReplaceAllString(url_without_protocol, "")
 			// if url_to_clean's domain name contains param's domain name
-			if strings.Contains(url_to_clean_domain_name, unwanted_param_domain_name) {
+			if strings.Contains(url_to_clean_domain_name, unwanted_qparam_domain_name) {
 				// Remove the unwanted param from the URL
-				url_to_clean = remove_param_if_present(url_to_clean, unwanted_param_without_domain_name)
+				url_to_clean = remove_param_if_present(url_to_clean, unwanted_qparam_without_domain_name)
 			}
 		}
 	}
