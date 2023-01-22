@@ -23,8 +23,8 @@ function url_extract(){
 #     else
 #         url_to_clean="$*"
 #     fi
-#     unwanted_params=$(cat ./unwanted_params.txt)
-#     for param in $unwanted_params ; do {
+#     unwanted_query_params=$(cat ./unwanted_query_params.txt)
+#     for param in $unwanted_query_params ; do {
 #         # if param doesn't contain ? symbol
 #         if [[ "$param" != *"?"* ]]; then
 #             # if param ends with * then replace * with .*

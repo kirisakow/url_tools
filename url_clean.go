@@ -50,7 +50,7 @@ func get_abs_path(filename string) string {
 	return filepath.Join(exe_dir, filename)
 }
 
-func unwanted_params(filename string) <-chan string {
+func unwanted_query_params(filename string) <-chan string {
 	ch := make(chan string)
 	go func() {
 		file, err := os.Open(get_abs_path(filename))
@@ -85,9 +85,9 @@ func remove_param_if_present(url_to_clean, unwanted_param string) string {
 	return url_to_clean
 }
 
-func clean_url_from_unwanted_params(url_to_clean string) string {
+func clean_url_from_unwanted_query_params(url_to_clean string) string {
 	// Iterate over the unwanted query params file contents line by line, as a channel
-	for unwanted_param := range unwanted_params("unwanted_params.txt") {
+	for unwanted_param := range unwanted_query_params("unwanted_query_params.txt") {
 		// Check if the unwanted param does not contain a '?' symbol
 		if !strings.Contains(unwanted_param, "?") {
 			// Remove the unwanted param from the URL
@@ -115,7 +115,7 @@ func main() {
 	urls_to_clean := read_input()
 	// Go through the list of URLs to clean
 	for _, url_to_clean := range urls_to_clean {
-		clean_url := clean_url_from_unwanted_params(url_to_clean)
+		clean_url := clean_url_from_unwanted_query_params(url_to_clean)
 		// Print the cleaned URL
 		fmt.Println(clean_url)
 	}

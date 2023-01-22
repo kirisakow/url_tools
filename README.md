@@ -65,7 +65,7 @@ cd /path/to/url_clean.go
 go build
 ```
 
-The `url_clean` function checks a URL against a 120+ long list of garbage query parameters ([`unwanted_params.txt`](https://github.com/kirisakow/url_tools/blob/main/unwanted_params.txt)) which it removes from the URL. Originally written in BASH, this function has been refactored in Go to be faster; the original BASH version is still there but consider it as deprecated.
+The `url_clean` function checks a URL against a 120+ long list of garbage query parameters ([`unwanted_query_params.txt`](https://github.com/kirisakow/url_tools/blob/main/unwanted_query_params.txt)) which it removes from the URL. Originally written in BASH, this function has been refactored in Go to be faster; the original BASH version is still there but consider it as deprecated.
 
 This function can process a URL either as an argument or as STDIN stream, and can be combined with the aforementioned BASH functions:
 
