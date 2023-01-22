@@ -9,6 +9,16 @@ import (
 	"strings"
 )
 
+func get_regex_pattern(key string) string {
+	regex_pattern := make(map[string]string)
+	regex_pattern["http_protocol"] = `https?://`
+	regex_pattern["http_url"] = regex_pattern["http_protocol"] + `[a-zA-Z0-9_.](:[0-9]{2,5})?(\S+)?`
+	if val, key_exists := regex_pattern[key]; key_exists {
+		return val
+	}
+	panic(fmt.Sprintf("unknown key %q", key))
+}
+
 // Reads input either from stdin or from the argument, if any.
 // Returns the input as a string.
 func read_input() []string {
@@ -86,6 +96,10 @@ func remove_param_if_present(url_to_clean, unwanted_qparam string) string {
 }
 
 func clean_url_from_unwanted_query_params(url_to_clean string) string {
+	is_valid_url := regexp.MustCompile(get_regex_pattern("http_url")).MatchString(url_to_clean)
+	if !is_valid_url {
+		return fmt.Sprintf("input string %q is not a valid URL", url_to_clean)
+	}
 	// Iterate over the unwanted query params file contents line by line, as a channel
 	for unwanted_qparam := range unwanted_query_params("unwanted_query_params.txt") {
 		// Check if the unwanted param does not contain a '?' symbol
@@ -97,7 +111,7 @@ func clean_url_from_unwanted_query_params(url_to_clean string) string {
 			parts := strings.Split(unwanted_qparam, "?")
 			unwanted_qparam_domain_name, unwanted_qparam_without_domain_name := parts[0], parts[1]
 			// Strip the protocol from the URL
-			url_without_protocol := regexp.MustCompile("https?://").ReplaceAllString(url_to_clean, "")
+			url_without_protocol := regexp.MustCompile(get_regex_pattern("http_protocol")).ReplaceAllString(url_to_clean, "")
 			// Strip everything after the domain name from the URL
 			url_to_clean_domain_name := regexp.MustCompile("/.*$").ReplaceAllString(url_without_protocol, "")
 			// if url_to_clean's domain name contains param's domain name
