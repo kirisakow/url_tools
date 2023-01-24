@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"kirisakow/url_tools/url_cleaner"
+	"github.com/kirisakow/url_tools/url_cleaner"
 )
 
 // test 1:
