@@ -41,6 +41,8 @@ https://stackoverflow.com/questions/70817657/cant-get-firefox-extension-logs-to-
 
 ### BASH function `url_unescape`
 
+💡 Also available as REST API: check https://github.com/kirisakow/api-py
+
 uses Python's `html.unescape` to unescape HTML entities, and `urllib.parse.unquote` to unescape non-ASCII characters in a URL in order to make it look prettier. Here again, the URL can be given either as an argument or as STDIN stream, and the two BASH functions `url_deref` and `url_unescape` are meant to complete each other and can be combined:
 
 ```sh
@@ -57,6 +59,8 @@ https://www.france24.com/fr/amériques/20221227-le-blizzard-du-siècle-fait-au-m
 ```
 
 ## Go function `url_clean`
+
+💡 Also available as REST API: check https://github.com/kirisakow/api-go
 
 First, don't forget to run
 
