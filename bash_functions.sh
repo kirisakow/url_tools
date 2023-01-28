@@ -19,13 +19,12 @@ function url_extract(){
 ### BEGIN url_deref
 function url_deref(){
     if [[ -p /dev/stdin ]]; then
-        export url_to_trace="$(cat -)"
+        url_to_trace="$(cat -)"
     else
-        export url_to_trace="$*"
+        url_to_trace="$*"
     fi
-    curl -w "\n%{url_effective}\n" -I -L -s -S $url_to_trace -o /dev/null
-    # curl -d "url=$url_to_trace" https://deref.link/deref | jq
-    unset url_to_trace
+    target_url=$(curl -w "%{url_effective}\n" -I -L -s -S $url_to_trace -o /dev/null)
+    echo "$target_url"
 }
 ### E N D url_deref
 
