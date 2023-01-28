@@ -16,42 +16,6 @@ function url_extract(){
 ### E N D url_extract
 
 
-### BEGIN url_clean (Deprecated: see README.md)
-# function url_clean(){
-#     if [[ -p /dev/stdin ]]; then
-#         url_to_clean="$(cat -)"
-#     else
-#         url_to_clean="$*"
-#     fi
-#     unwanted_query_params=$(cat ./unwanted_query_params.txt)
-#     for param in $unwanted_query_params ; do {
-#         # if param doesn't contain ? symbol
-#         if [[ "$param" != *"?"* ]]; then
-#             # if param ends with * then replace * with .*
-#             param=$(echo "$param" | sed -E "s/[*]$/.*/")
-#             url_to_clean=$(echo "$url_to_clean" | sed -E "s/[&]?${param}=[^&]*//g")
-#         # if param contains ? symbol
-#         else
-#             url_without_protocol=$(echo "$url_to_clean" | sed -E 's|https?://||')
-#             url_domain=$(echo "$url_without_protocol" | sed -E 's|/.*$||')
-#             params_domain_name=$(echo "$param" | sed -E 's/[?].+$//')
-#             # if url_to_clean's domain name contains param's domain name
-#             if [[ "$url_domain" == *"$params_domain_name"* ]]; then
-#                 param_without_domain_name=$(echo "$param" | sed -E 's/.+[?]//')
-#                 # if param ends with * then replace * with .*
-#                 param=$(echo "$param_without_domain_name" | sed -E "s/[*]$/.*/")
-#                 url_to_clean=$(echo "$url_to_clean" | sed -E "s/[&]?${param}=[^&]*//g")
-#             fi
-#         fi
-#     }; done
-#     # remove final ? symbol if no params left
-#     url_to_clean=$(echo "$url_to_clean" | sed -E "s/[?]$//")
-#     echo "$url_to_clean"
-#     unset url_to_clean
-# }
-### E N D url_clean (Deprecated: see README.md)
-
-
 ### BEGIN url_deref
 function url_deref(){
     if [[ -p /dev/stdin ]]; then
