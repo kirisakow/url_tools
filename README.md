@@ -82,9 +82,9 @@ This function can process a URL either as an argument or as STDIN stream, and ca
 
 ```sh
 # process a URL as STDIN stream:
-url_deref "$long_url_with_redirect" | url_unescape | ./url_clean
+url_deref "$long_url_with_redirect" | url_unescape | url_clean
 # or process a URL as an argument:
-./url_clean $(url_deref "$long_url_with_redirect" | url_unescape)
+url_clean $(url_deref "$long_url_with_redirect" | url_unescape)
 ```
 Result:
 ```
