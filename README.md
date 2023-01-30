@@ -65,8 +65,15 @@ https://www.france24.com/fr/amériques/20221227-le-blizzard-du-siècle-fait-au-m
 First, don't forget to run
 
 ```sh
-cd /path/to/url_clean.go
+# 0. download the project and cd into the project dir
+git clone ...
+cd /path/to/url_tools
+
+# 1. build
 go build
+
+# 2. add to $PATH
+export PATH="/path/to/url_tools:$PATH"
 ```
 
 The `url_clean` function checks a URL against a 120+ long list of garbage query parameters ([`unwanted_query_params.txt`](https://github.com/kirisakow/url_tools/blob/main/unwanted_query_params.txt)) which it removes from the URL. Originally written in BASH, this function has been refactored in Go to be faster; the original BASH version is still there but consider it as deprecated.
