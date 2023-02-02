@@ -143,8 +143,8 @@ func remove_param_if_present(url_to_clean, unwanted_qparam string) string {
 	// Use a regular expression to match the unwanted query parameter and remove it
 	r := regexp.MustCompile(fmt.Sprintf(`[&]?%s=[^&]*`, unwanted_qparam))
 	url_to_clean = r.ReplaceAllString(url_to_clean, "")
-	// remove final ? symbol if no params left
-	url_to_clean = regexp.MustCompile("[?]$").ReplaceAllString(url_to_clean, "")
+	// remove any of the symbols ?&# or any combination of them if found at the end of the URL string
+	url_to_clean = regexp.MustCompile("[?&#]+$").ReplaceAllString(url_to_clean, "")
 	return url_to_clean
 }
 
