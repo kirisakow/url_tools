@@ -3,15 +3,15 @@
 ### BEGIN url_extract
 function url_extract(){
     if [[ -p /dev/stdin ]]; then
-        text_to_search="$(cat -)"
+        text_to_search_in="$(cat -)"
     else
-        text_to_search="$*"
+        text_to_search_in="$*"
     fi
-    regex_pattern="(dict|file|s?t?ftps?|gophers?|https?|imaps?|ldaps?|mqtt|pop3s?|rtmp|rtsp|scp|smbs?|smtps?|telnet)://[a-zA-Z0-9_.](:[0-9]{2,5})?([a-zA-Z0-9_.,/#!?&;=%:~*-]+)?"
-    echo "$text_to_search" | grep --color=never -Eo "$regex_pattern"
+    regex_pattern="(dict|file|s?t?ftps?|gophers?|https?|imaps?|ldaps?|mqtt|pop3s?|rtmp|rtsp|scp|smbs?|smtps?|telnet)://[a-zA-Z0-9_.]+(:[0-9]{2,5})?([a-zA-Z0-9_.,/#!?&;=%:~*-]+)?"
+    echo "$text_to_search_in" | grep --color=never -Eo "$regex_pattern"
     # Here's a different approach, if limited to HTML, which extracts URLs from inside <A> tag's href attribute's value using Perl's so-called “lookaround” regex syntax:
     # perl_regex_pattern='(?<=href=")[^"]*(?=")'
-    # echo "$text_to_search" | grep -Po $perl_regex_pattern
+    # echo "$text_to_search_in" | grep -Po $perl_regex_pattern
 }
 ### E N D url_extract
 
