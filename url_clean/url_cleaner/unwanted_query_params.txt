@@ -49,6 +49,7 @@ elqTrack
 elqTrackId
 esrc
 etear
+facebook.com?acontext
 facebook.com?hrc
 facebook.com?refsrc
 fb_action_ids
