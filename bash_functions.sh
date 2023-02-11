@@ -23,7 +23,7 @@ function url_deref(){
     else
         url_to_trace="$*"
     fi
-    target_url=$(curl -w "%{url_effective}\n" -L -s -S $url_to_trace -o /dev/null)
+    target_url=$(curl -w "%{url_effective}" -L -s -S $url_to_trace -o /dev/null)
     echo "$target_url"
 }
 ### E N D url_deref
@@ -32,11 +32,10 @@ function url_deref(){
 ### BEGIN function url_unescape
 function url_unescape() {
     if [[ -p /dev/stdin ]]; then
-        export url_to_unescape="$(cat -)"
+        url_to_unescape="$(cat -)"
     else
-        export url_to_unescape="$*"
+        url_to_unescape="$*"
     fi
-    python3 $(dirname $BASH_SOURCE)/url_unescape.py
-    unset url_to_unescape
+    python3 $(dirname $BASH_SOURCE)/url_unescape.py "$url_to_unescape"
 }
 ### E N D function url_unescape
