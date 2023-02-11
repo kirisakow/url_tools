@@ -24,7 +24,7 @@ function url_deref(){
         url_to_trace="$*"
     fi
     target_url=$(curl -w "%{url_effective}" -L -s -S $url_to_trace -o /dev/null)
-    echo "$target_url"
+    echo -n "$target_url"
 }
 ### E N D url_deref
 

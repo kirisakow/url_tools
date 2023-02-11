@@ -16,6 +16,6 @@ func main() {
 	for _, url_to_clean := range urls_to_clean {
 		clean_url := url_cleaner.Clean_url_from_unwanted_query_params(url_to_clean)
 		// Print the cleaned URL
-		fmt.Println(clean_url)
+		fmt.Print(clean_url)
 	}
 }
