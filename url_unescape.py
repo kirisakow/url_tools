@@ -30,5 +30,6 @@ def url_unescape(url_to_unescape=None) -> str:
 
 if __name__ == '__main__':
     print(
-        url_unescape(sys.argv[1])
+        url_unescape(sys.argv[1]),
+        end=''
     )
