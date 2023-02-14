@@ -35,31 +35,34 @@ def url_unescape(url_to_unescape=None) -> str:
                 and re.search(tasks.html_entity.regex, url_to_unescape)):
             jl.print(f'apply html.unescape()')
             result = html.unescape(url_to_unescape)
-            jl.print(f'result: {result}')
             if result != url_to_unescape:
                 url_to_unescape = result
             else:
                 tasks.html_entity.repeat = False
+            is_same = ' (same)' if not tasks.html_entity.repeat else ''
+            jl.print(f'result{is_same}: {result}')
         if (tasks.escaped.repeat == True
                 and re.search(tasks.escaped.regex, url_to_unescape)):
             jl.print(f"resolve escaped characters (%uXXXX)")
             result = re.sub(tasks.escaped.regex,
                             lambda m: chr(int(m.group(1), 16)),
                             url_to_unescape)
-            jl.print(f'result: {result}')
             if result != url_to_unescape:
                 url_to_unescape = result
             else:
                 tasks.escaped.repeat = False
+            is_same = ' (same)' if not tasks.escaped.repeat else ''
+            jl.print(f'result{is_same}: {result}')
         if (tasks.percent_encoded.repeat == True
                 and re.search(tasks.percent_encoded.regex, url_to_unescape)):
             jl.print(f"resolve percent-encoded characters (%XX)")
             result = urllib.parse.unquote(url_to_unescape)
-            jl.print(f'result: {result}')
             if result != url_to_unescape:
                 url_to_unescape = result
             else:
                 tasks.percent_encoded.repeat = False
+            is_same = ' (same)' if not tasks.percent_encoded.repeat else ''
+            jl.print(f'result{is_same}: {result}')
     return url_to_unescape
 
 
