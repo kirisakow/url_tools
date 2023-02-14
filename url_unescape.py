@@ -63,5 +63,8 @@ def url_unescape(url_to_unescape=None) -> str:
 
 
 if __name__ == '__main__':
-    unescaped_url = url_unescape(sys.argv[1])
-    print(unescaped_url)
+    try:
+        unescaped_url = url_unescape(args.url_to_unescape)
+        print(unescaped_url)
+    except KeyboardInterrupt:
+        sys.exit('\ninterrupted by user')
