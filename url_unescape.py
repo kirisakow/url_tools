@@ -23,7 +23,7 @@ def url_unescape(url_to_unescape=None) -> str:
         return ''
     url_to_unescape = url_to_unescape.strip('\n')
     regex_patterns = {
-        'html_entity': r'[&]([a-z]+)|([#][0-9]+)[;]',
+        'html_entity': r'&[a-z]+|(#[0-9]+);',
         'escaped': r'%[uU]([0-9A-Fa-f]{4})',
         'percent_encoded': r'%([0-9A-Fa-f]{2})'
     }
