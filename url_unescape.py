@@ -1,3 +1,4 @@
+import argparse
 import html
 import os
 import logging
@@ -63,6 +64,20 @@ def url_unescape(url_to_unescape=None) -> str:
 
 
 if __name__ == '__main__':
+    usage = """Unescape an escaped URL or any string by running
+
+    python3 url_unescape.py "url or string to unescape"
+
+The script makes a URL or any string prettier by resolving HTML entities (e.g. `&amp;` -> `&`) with Python's `html.unescape`, non-ASCII escaped characters (%%uXXXX) with a regex pattern, and percent-encoded characters (%%XX) with `urllib.parse.unquote`.
+
+Source code: https://github.com/kirisakow/url_tools
+----------------------------------------------------------------
+"""
+    parser = argparse.ArgumentParser(
+        usage=usage, epilog="Source code: https://github.com/kirisakow/url_tools")
+    parser.add_argument('url_to_unescape', default=None, type=str,
+                        help="(required) a string (most often a URL) you want to unescape.")
+    args = parser.parse_args()
     try:
         unescaped_url = url_unescape(args.url_to_unescape)
         print(unescaped_url)
