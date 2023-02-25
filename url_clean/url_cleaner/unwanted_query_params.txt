@@ -107,6 +107,8 @@ trk
 trkCampaign
 tt_content
 tt_medium
+twitter.com?ref_src
+twitter.com?ref_url
 twitter.com?s
 twitter.com?t
 ul_*
