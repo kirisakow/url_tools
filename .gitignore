@@ -1,3 +1,5 @@
+.vscode/
+
 # Binaries for programs and plugins
 url_clean
 !url_clean/
