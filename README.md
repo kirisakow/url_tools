@@ -1,3 +1,5 @@
+**WARNING** This library is still under development and intended for experimental purposes only.
+
 # My URL tools written in Python, BASH and Go
 
 ## BASH functions `url_extract`, `url_deref` and `url_unescape`
