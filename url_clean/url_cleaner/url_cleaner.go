@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"embed"
 	"fmt"
-	"log"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -108,8 +107,6 @@ func unwanted_query_params(filename string) <-chan string {
 			}
 		} else {
 			// Read unwanted query params file from the embedded filesystem
-			log.Printf("error while reading %q from disk\n", filename)
-			log.Printf("trying to retrieve %q from an embedded filesystem with the Open() method\n", filename)
 			if unw_qp_file_embedded, err := embedded_assets.Open(filename); err == nil {
 				scanner := bufio.NewScanner(unw_qp_file_embedded)
 				for scanner.Scan() {
@@ -121,8 +118,6 @@ func unwanted_query_params(filename string) <-chan string {
 					os.Exit(1)
 				}
 			} else {
-				log.Printf("error while reading %q from an embedded filesystem with the Open() method: %s", filename, err)
-				log.Printf("trying to retrieve %q from an embedded filesystem with the ReadFile() method\n", filename)
 				if unw_qp_file_embedded_as_bytearray, err := embedded_assets.ReadFile(filename); err == nil {
 					lines := strings.Split(string(unw_qp_file_embedded_as_bytearray), "\n")
 					for _, line := range lines {
