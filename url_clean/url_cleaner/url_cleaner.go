@@ -139,7 +139,7 @@ func remove_param_if_present(url_to_clean, unwanted_qparam string) string {
 	r := regexp.MustCompile(fmt.Sprintf(`[&]?%s=[^&]*`, unwanted_qparam))
 	url_to_clean = r.ReplaceAllString(url_to_clean, "")
 	// remove any of the symbols ?&# or any combination of them if found at the end of the URL string
-	url_to_clean = regexp.MustCompile("[?&#]+$").ReplaceAllString(url_to_clean, "")
+	url_to_clean = regexp.MustCompile("[?&#/]+$").ReplaceAllString(url_to_clean, "")
 	return url_to_clean
 }
 
