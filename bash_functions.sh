@@ -39,3 +39,15 @@ function url_unescape() {
     python3 $(dirname $BASH_SOURCE)/url_unescape.py "$url_to_unescape"
 }
 ### E N D function url_unescape
+
+
+### BEGIN function summarize-with-bard
+function summarize-with-bard() {
+    if [[ -p /dev/stdin ]]; then
+        url_to_summarize="$(cat -)"
+    else
+        url_to_summarize="$*"
+    fi
+    bard-cli "summarize the key points of the following story: $url_to_summarize"
+}
+### E N D function summarize-with-bard
