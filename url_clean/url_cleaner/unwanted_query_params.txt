@@ -125,3 +125,7 @@ yandex?redircnt
 yclid
 youtube.com?feature
 youtube.com?kw
+youtube.com?si
+youtu.be?feature
+youtu.be?kw
+youtu.be?si
