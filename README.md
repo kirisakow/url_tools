@@ -112,7 +112,7 @@ go build
 export PATH="/path/to/url_tools:$PATH"
 ```
 
-### Firefox add-ons to help you keep clean the URLs as you browse
+### Firefox add-ons to help you keep the URLs clean of junk as you browse
 
 * my favorite, for it allows to customize the blacklist: https://addons.mozilla.org/firefox/addon/neat-url/;
 * this one has a “Recommended” badge: https://addons.mozilla.org/firefox/addon/clearurls/;
