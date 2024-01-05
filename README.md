@@ -112,7 +112,36 @@ go build
 export PATH="/path/to/url_tools:$PATH"
 ```
 
-### Firefox add-ons to help you keep the URLs clean of junk as you browse
+### Other tools to help you keep the URLs clean of junk as you browse
 
-* my favorite, for it allows to customize the blacklist: https://addons.mozilla.org/firefox/addon/neat-url/;
-* this one has a “Recommended” badge: https://addons.mozilla.org/firefox/addon/clearurls/;
+#### Browser extension `uBlock Origin` (my #1 favorite)
+
+The powerful [browser extension uBlock Origin](https://ublockorigin.com) adblocker is also a powerful URL cleaner. To keep your URLs clean of junk query parameters, install uBlock Origin, go to the parameters, then to the `My filters` tab, and use the [`removeparam` modifier](https://adguard.com/kb/general/ad-filtering/create-own-filters/#removeparam-modifier) with either plain-text or regex values:
+
+![](/img/ublock_origin_my_filters_removeparam_examples.png)
+
+Here, you can copy my filters as text:
+
+```ini
+||*$removeparam=_ope
+||*$removeparam=/^(at|ul|utm)_/
+||*$removeparam=/^act(CampaignType|Id|Source)/
+||*$removeparam=/^hash(a|b|c)/
+||*$removeparam=bxid
+||*$removeparam=CMP
+||*$removeparam=cndid
+||*$removeparam=esrc
+||*$removeparam=etear
+||linkedin.com*$removeparam=/^(ref|tracking|reference)Id/
+||twitter.com*$removeparam=/^(t|s)/
+||*$removeparam=ueid
+||*$removeparam=xtor
+```
+
+#### Browser extension `neat-url`
+
+[Firefox add-on `neat-url`](https://addons.mozilla.org/firefox/addon/neat-url/) allows for blacklist customization. However, it's not as powerful as uBlock Origin.
+
+#### Browser extension `clearurls`
+
+[Firefox add-on `clearurls`](https://addons.mozilla.org/firefox/addon/clearurls/) has a “Recommended” badge. However, it doesn't allow for blacklist customization at all.
