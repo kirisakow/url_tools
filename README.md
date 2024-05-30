@@ -101,15 +101,17 @@ Unlike the former functions `url_deref` and `url_unescape` which only process on
 ### Installation
 
 ```sh
-# 0. download the project and cd into the project dir
-git clone ...
-cd /path/to/url_tools
+# 0. install go with snap or apt
 
-# 1. build
+# 1. download url_tools project and cd into the project dir
+git clone ...
+cd ./url_tools/url_clean
+
+# 1. build the binary
 go build
 
 # 2. add to $PATH
-export PATH="/path/to/url_tools:$PATH"
+export PATH="/path/to/url_tools/url_clean:$PATH"
 ```
 
 ### Other tools to help you keep the URLs clean of junk as you browse
