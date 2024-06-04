@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "url-unescape"
+version = "0.1.0"
+description = "A few tools to process URLs as strings"
+authors = ["Kiril Isakov <kirix.isakov@gmail.com>"]
+readme = "../README.md"
+license = "../LICENSE"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+argparse = "^1.4.0"
+logging = "^0.4.9.6"
+urllib3 = "^2.2.1"
+dot-dict = {path = "../../dot-dict/", develop = true}
+journal-logger = {path = "../../journal-logger/", develop = true}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

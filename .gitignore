@@ -1,3 +1,6 @@
+# Poetry lock
+poetry.lock
+
 .vscode/
 
 # Binaries for programs and plugins

@@ -1,22 +1,15 @@
 import argparse
 import html
-import os
 import logging
 import re
 import sys
 import urllib.parse
-sys.path.append(
-    os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__),
-            '../telegram_bots'
-        )
-    )
-)
-from utils import JournalLogger, DotDict
+from dot_dict.dot_dict import DotDict
+from journal_logger.journal_logger import JournalLogger
+
 
 logging.basicConfig(level=logging.DEBUG)
-jl = JournalLogger(program_name='url_tools')
+jl = JournalLogger(program_name='url_unescape')
 
 
 def url_unescape(url_to_unescape=None) -> str:
