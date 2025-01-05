@@ -72,6 +72,9 @@ gs_l
 hasha
 hashb
 hashc
+hctky
+hdpid
+hlkid
 hmb_campaign
 hmb_medium
 hmb_source
@@ -103,6 +106,7 @@ spJobID
 spMailingID
 spReportId
 spUserID
+stcr
 trk
 trkCampaign
 tt_content
